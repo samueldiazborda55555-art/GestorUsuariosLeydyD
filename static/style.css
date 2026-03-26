@@ -1,0 +1,48 @@
+body{
+    background-color: #fdffe6;
+}
+
+.card{
+    max-width: 500px;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.botones .btn{
+    width: 180px;
+    font-size: 18px;
+}
+
+/* ingresar/login*/
+.login-container{
+    max-width: 300px;
+    margin: 100px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.login-container input{
+    width: 100%;
+    padding: 8px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login-container button{
+    width: 100%;
+    padding: 10px;
+    background: #4facfe;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.forgot a{
+    text-decoration: none;
+    color: #4facfe;
+    font-size: 14px;}

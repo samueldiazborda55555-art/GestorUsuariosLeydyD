@@ -1,0 +1,27 @@
+<!-- crear un formulario de inicio de sesion usuario  contrsaeña  boton de ingresar  aplicar estilo -->
+
+<!-- crear un formulario de inicio de sesion usuario  contrsaeña  boton de ingresar  aplicar estilo -->
+
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ingresar</title>
+<link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form method="POST" action="{{ url_for('login_form')}}">
+            <input type="text" placeholder="Usuario" name="txtusuario" required>
+            <input type="password" placeholder="Contraseña" name="txtcontrasena" required>
+            <button type="submit">Ingresar</button>
+            <p class="forgot">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+</html>
