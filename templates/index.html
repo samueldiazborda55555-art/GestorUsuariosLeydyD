@@ -15,8 +15,8 @@
 
 <body>
 
-    <div class="container mt-5">
-        <div class="card shadow p-4 text-center">
+    <div class="container-fluid mt-5 px-5">
+        <div class="card text-center">
 
             <h1 class="text-primary mb-4">
                 Bienvenido al gestor de usuarios
@@ -27,17 +27,97 @@
                     Registrar Usuario
                 </a>
 
-                <a href="/usuarios" class="btn btn-primary m-2">
-                    Ver Usuarios
+                <a href="{{url_for('forempleado')}}" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#myModale">
+                    Registrar Empleados
                 </a>
 
-                <a class="btn btn-danger m-2" type="input" href="{{url_for('salir')}}" >
+                <a class="btn btn-danger m-2" type="input" href="{{url_for('salir')}}">
                     Cerrar Sesión
                 </a>
-
             </div>
+
             <!--llamar al modal-->
             {% include 'registrarusu.html' %}
+            {% include 'registroempleados.html' %}
+
+            <!-- mensajeee-->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-2">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- tabla de usuarios -->
+            <h2 class="text-center mt-4">Gestion de Usuarios</h2>
+
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <td>ID</td>
+                        <td>Usuario</td>
+                        <td>Contraseña</td>
+                        <td>Rol</td>
+                        <td>Opciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in user %}
+                    <tr>
+                        <td>{{ u[0] }}</td>
+                        <td>{{ u[1] }}</td>
+                        <td>{{ u[2] }}</td>
+                        <td>{{ u[3] }}</td>
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ url_for('eliminarusu', id=u[0]) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿seguro que desea eliminar el usuariio?')">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- tabla de empleados -->
+             <h2 class="text-center mt-4">Gestion de Empleados</h2>
+            <table class="table table-bordered mt-3">
+                <thead class="table-dark">
+                    <tr>
+                        <td>ID</td>
+                        <td>nombre</td>
+                        <td>apellido</td>
+                        <td>documento</td>
+                        <td>cargo</td>
+                        <td>departamento</td>
+                        <td>horas extra</td>
+                        <td>bonificacion</td>
+                        <td>salario neto</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in empleados %}
+                    <tr>
+                        <td>{{ e[0] }}</td>
+                        <td>{{ e[2] }}</td>
+                        <td>{{ e[3] }}</td>
+                        <td>{{ e[1] }}</td>
+                        <td>{{ e[4] }}</td>
+                        <td>{{ e[11] }}</td>
+                        <td>{{ e[6] }}</td>
+                        <td>{{ e[7] }}</td>
+                        <td>{{ e[5] }}</td>
+
+                        <td>
+                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ url_for('eliminar_empleado', id=e[0]) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿seguro que desea eliminar el empleado?')">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
         </div>
     </div>
 

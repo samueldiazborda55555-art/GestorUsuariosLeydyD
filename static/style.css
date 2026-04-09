@@ -3,7 +3,7 @@ body{
 }
 
 .card{
-    max-width: 500px;
+    max-width: 1000px;
     margin: auto;
     border-radius: 15px;
 }
@@ -15,7 +15,7 @@ body{
 
 /* ingresar/login*/
 .login-container{
-    max-width: 300px;
+    max-width: 500px;
     margin: 100px auto;
     background: white;
     padding: 20px;
@@ -46,3 +46,17 @@ body{
     text-decoration: none;
     color: #4facfe;
     font-size: 14px;}
+
+.card {
+    width: 100% !important;
+}
+
+.container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+table {
+    width: 100% !important;
+    white-space: nowrap;
+}
