@@ -15,8 +15,8 @@
 
 <body>
 
-    <div class="container-fluid mt-5 px-5">
-        <div class="card text-center">
+    <div class="container mt-5">
+        <div class="card shadow p-4 text-center">
 
             <h1 class="text-primary mb-4">
                 Bienvenido al gestor de usuarios
@@ -27,19 +27,17 @@
                     Registrar Usuario
                 </a>
 
-                <a href="{{url_for('forempleado')}}" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#myModale">
-                    Registrar Empleados
+                <a href="{{url_for('forempleado')}}" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#myModale" >
+                    registrar empleados
                 </a>
-
                 <a class="btn btn-danger m-2" type="input" href="{{url_for('salir')}}">
                     Cerrar Sesión
                 </a>
-            </div>
 
+            </div>
             <!--llamar al modal-->
             {% include 'registrarusu.html' %}
             {% include 'registroempleados.html' %}
-
             <!-- mensajeee-->
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -49,9 +47,8 @@
             {% endif %}
             {% endwith %}
 
-            <!-- tabla de usuarios -->
-            <h2 class="text-center mt-4">Gestion de Usuarios</h2>
 
+            <h2 class="text-center mt-4">Gestion de Ususarios </h2>
             <table class="table table-bordered mt-3">
                 <thead class="table-dark">
                     <tr>
@@ -60,6 +57,7 @@
                         <td>Contraseña</td>
                         <td>Rol</td>
                         <td>Opciones</td>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -70,7 +68,7 @@
                         <td>{{ u[2] }}</td>
                         <td>{{ u[3] }}</td>
                         <td>
-                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ url_for('editarusu', id=u[0]) }}" class="btn btn-warning btn-sm">Editar</a>
                             <a href="{{ url_for('eliminarusu', id=u[0]) }}" class="btn btn-danger btn-sm"
                             onclick="return confirm('¿seguro que desea eliminar el usuariio?')">Eliminar</a>
                         </td>
@@ -79,20 +77,25 @@
                 </tbody>
             </table>
 
-            <!-- tabla de empleados -->
-             <h2 class="text-center mt-4">Gestion de Empleados</h2>
+
+            <!--Tabla Empleados-->
+            <h2 class="text-center mt-4">Gestion de Empleados </h2>
+
             <table class="table table-bordered mt-3">
                 <thead class="table-dark">
                     <tr>
                         <td>ID</td>
-                        <td>nombre</td>
-                        <td>apellido</td>
-                        <td>documento</td>
-                        <td>cargo</td>
-                        <td>departamento</td>
-                        <td>horas extra</td>
-                        <td>bonificacion</td>
-                        <td>salario neto</td>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
+                        <td>Documento</td>
+                        <td>Cargo</td>
+                        <td>Departamento</td>
+                        <td>Horas Extras</td>
+                        <td>Bonificación</td>
+                        <td>Salario Base</td>
+                        <td>Opciones</td>
+
+
                     </tr>
                 </thead>
                 <tbody>
@@ -107,9 +110,8 @@
                         <td>{{ e[6] }}</td>
                         <td>{{ e[7] }}</td>
                         <td>{{ e[5] }}</td>
-
                         <td>
-                            <a href="" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{{ url_for('editarempleado', id=e[0]) }}" class="btn btn-warning btn-sm">Editar</a>
                             <a href="{{ url_for('eliminar_empleado', id=e[0]) }}" class="btn btn-danger btn-sm"
                             onclick="return confirm('¿seguro que desea eliminar el empleado?')">Eliminar</a>
                         </td>
@@ -117,6 +119,8 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+
 
         </div>
     </div>

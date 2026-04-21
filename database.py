@@ -6,7 +6,7 @@ def conectar():
         host="localhost",
         user="root",
         password= "",
-        database = "empresa"
+        database = "empresal"
     )
     if conn .is_connected():
         print("conexion a la base de datos realizada correctamente")
