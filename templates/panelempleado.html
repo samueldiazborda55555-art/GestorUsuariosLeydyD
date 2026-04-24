@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>panel empleado</title>
+    <meta charset="UTF-8">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Estilo propio -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+
+            <h2 class="text-center text-primary mb-4">Bienvenido empleado {{ session['usuario']}}</h2>
+
+            <h4>Mi información</h4>
+
+            <table class="table table-bordered mt-3">
+                <tr>
+                    <th>Nombre</th>
+                    <td>{{ empleado[1] }}</td>
+                </tr>
+                <tr>
+                    <th>Apellido</th>
+                    <td>{{ empleado[2] }}</td>
+                </tr>
+                <tr>
+                    <th>Cargo</th>
+                    <td>{{ empleado[3] }}</td>
+                </tr>
+                <tr>
+                    <th>Departamento</th>
+                    <td>{{ empleado[4] }}</td>
+                </tr>
+                <tr>
+                    <th>Horas extras</th>
+                    <td>{{ empleado[5] }}</td>
+                </tr>
+                <tr>
+                    <th>Bonificación</th>
+                    <td>{{ empleado[6] }}</td>
+                </tr>
+                <tr>
+                    <th>Salario bruto</th>
+                    <td>{{ empleado[7] }}</td>
+                </tr>
+                <tr>
+                    <th>Salario neto</th>
+                    <td>{{ empleado[8] }}</td>
+                </tr>
+            </table>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('editarem', id=empleado[0]) }}" class="btn btn-warning">
+                    Editar
+                </a>
+            </div>
+
+
+            <div class="text-center mt-3">
+                <a href="{{ url_for('salir') }}" class="btn btn-danger">Cerrar sesión</a>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

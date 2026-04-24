@@ -31,7 +31,9 @@ def login_form():
         if user[3] == "administrador":
                 return redirect(url_for('inicio'))
         else:
-                return "Bienvenido empleado"
+            return redirect(url_for('panel_empleado'))
+            
+            
     else: 
         flash("Usuario y contraseña incorrecto", "danger")
         return redirect(url_for('login_form'))
@@ -56,6 +58,75 @@ def inicio():
     empleados = cursor.fetchall()
        
     return render_template('index.html', user=lista, empleados=empleados)
+
+#panel empleado
+@apps.route('/panel_empleado')
+def panel_empleado():
+
+    if 'usuario' not in session:
+        return redirect(url_for('login_form'))
+    #acceso restringido:
+    if session.get('rol') != 'empleado':
+        return redirect(url_for('inicio'))
+    
+
+    con = conectar()
+    cursor = con.cursor()
+
+    cursor.execute("""
+                    SELECT e.id, e.nombreEmple, e.apellidoEmple, e.cargo, e.id_dep,
+                    e.horasExtras, e.bonificacion, e.salarioB, e.salario_neto
+                    FROM empleados e 
+                    JOIN usuarios u ON u.documentoEmple = e.documentoEmple 
+                    WHERE u.usuario = %s""", (session['usuario'],))
+    empleado = cursor.fetchone()
+
+    return render_template('panelempleado.html', empleado=empleado)
+
+#editar empleado 
+@apps.route('/editarem/<int:id>')
+def editarem(id):
+
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    
+    con = conectar()
+    cursor = con.cursor()
+
+    sql2 = "SELECT * FROM empleados WHERE id=%s"
+    cursor.execute(sql2, (id,))
+    empleado = cursor.fetchone()
+
+    cursor.close()
+    con.close()
+
+    return render_template("editarem.html", emple=empleado)
+
+#actualiza empleado
+@apps.route('/actualizarem', methods=["POST"])
+def actualizarem():
+
+    id = request.form["id"]
+    nombre = request.form["txtnombre"]
+    apellido = request.form["txtapellido"]
+    cargo = request.form["txtcargo"]
+    departamento = request.form["txtdepartamento"]
+
+    con = conectar()
+    cursor = con.cursor()
+
+    sqle = """UPDATE empleados 
+              SET nombreEmple=%s, apellidoEmple=%s, cargo=%s, id_dep=%s 
+              WHERE id=%s"""
+
+    cursor.execute(sqle, (nombre, apellido, cargo, departamento, id))
+    con.commit()
+    
+    cursor.close()
+    con.close()
+
+    return redirect(url_for('panel_empleado'))
+
 
 
 #guardar usuario
@@ -327,7 +398,6 @@ def actualizar_empleado():
 
     return redirect(url_for('inicio'))
 
-    redirect(url_for('inicio'))
 
 if __name__ == '__main__':
     apps.run(debug=True)
